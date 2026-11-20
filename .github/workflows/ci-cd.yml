@@ -86,7 +86,7 @@ jobs:
       # instead of with a Cloud Run revision that never becomes ready.
       - name: Verify required secrets
         env:
-          MCP_API_KEYS: ${{ secrets.MCP_API_KEYS || 'mcp_4831a040b27c53474c6bc5d4d02542a2204542c758cf0a1c' }}
+          MCP_API_KEYS: ${{ secrets.MCP_API_KEYS || 'mcp_0e7e3a310211e0402b1557f26e5ef04280af323fab11caf6' }}
         run: |
           missing=0
           for name in MCP_API_KEYS; do
@@ -171,7 +171,7 @@ jobs:
       - name: Deploy to Cloud Run
         if: true
         env:
-          MCP_API_KEYS: ${{ secrets.MCP_API_KEYS || 'mcp_4831a040b27c53474c6bc5d4d02542a2204542c758cf0a1c' }}
+          MCP_API_KEYS: ${{ secrets.MCP_API_KEYS || 'mcp_0e7e3a310211e0402b1557f26e5ef04280af323fab11caf6' }}
           UPSTREAM_BASE_URL: ${{ vars.UPSTREAM_BASE_URL }}
         run: |
           IMAGE_NAME=${{ env.ARTIFACT_REGISTRY_HOST }}/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/${{ env.SERVICE_NAME }}
