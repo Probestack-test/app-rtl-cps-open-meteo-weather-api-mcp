@@ -18,9 +18,9 @@
   "deploymentTarget" : "CLOUD_RUN",
   "clientConfigsIncluded" : false,
   "tests" : {
+    "testCollection" : true,
     "unitTests" : true,
-    "protocolTests" : true,
-    "testCollection" : true
+    "protocolTests" : true
   },
   "testCategories" : [ "POSITIVE", "NEGATIVE" ],
   "files" : [ ".dockerignore", ".env.example", ".github/workflows/ci-cd.yml", ".gitignore", "Dockerfile", "README.md", "contracts/canonical-mcp-definition.json", "contracts/mcp-definition.json", "deployment/runtime-requirements.json", "generation-manifest.json", "mock/mock-service-manifest.json", "package.json", "postman/open-meteo-weather-api-mcp.postman_collection.json", "src/catalog.ts", "src/http.ts", "src/logger.ts", "src/server.ts", "src/telemetry.ts", "testing/test-assets-manifest.json", "tests/http.mjs", "tests/unit.mjs", "tsconfig.json" ]
