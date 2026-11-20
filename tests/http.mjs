@@ -7,13 +7,21 @@ const child = spawn(process.execPath, ['dist/http.js'], { stdio: ['ignore', 'pip
   ...process.env, PORT: String(port), HOST: '127.0.0.1', MCP_ALLOWED_HOSTS: host,
   MCP_ALLOWED_ORIGINS: origin, MCP_API_KEYS: apiKey
 }});
+// Captured so a startup crash is visible in CI instead of only "did not become
+// ready" -- piped stdio is otherwise read by nothing and the reason is lost.
+let childOutput = '';
+child.stdout.on('data', (chunk) => { childOutput += chunk; });
+child.stderr.on('data', (chunk) => { childOutput += chunk; });
+let childExited = false;
+child.on('exit', (code, signal) => { childExited = true;
+  childOutput += `\n[dist/http.js exited early: code=${code} signal=${signal}]`; });
 try {
   let ready = false;
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 100 && !childExited; i++) {
     try { const r = await fetch(origin + '/mcp', { method: 'POST' }); if (r.status === 400) { ready = true; break; } } catch {}
     await new Promise(resolve => setTimeout(resolve, 100));
   }
-  assert.ok(ready, 'HTTP MCP server did not become ready');
+  assert.ok(ready, 'HTTP MCP server did not become ready. Output:\n' + childOutput);
   const meta = { 'io.modelcontextprotocol/protocolVersion': '2026-07-28',
     'io.modelcontextprotocol/clientInfo': { name: 'generated-wire-test', version: '1' },
     'io.modelcontextprotocol/clientCapabilities': {} };
