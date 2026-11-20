@@ -1,0 +1,84 @@
+{
+  "info" : {
+    "name" : "Open-Meteo Weather API MCP",
+    "description" : "Generated MCP 2026-07-28 Streamable HTTP requests for open-meteo-weather-api-mcp. Set baseUrl (and apiKey/accessToken, if this server requires one) as collection variables before running these.",
+    "schema" : "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable" : [ {
+    "key" : "baseUrl",
+    "value" : "https://replace-with-deployed-host",
+    "description" : "The deployed server's base URL."
+  }, {
+    "key" : "mcpPath",
+    "value" : "/mcp",
+    "description" : "The MCP endpoint path."
+  } ],
+  "item" : [ {
+    "name" : "server/discover",
+    "request" : {
+      "method" : "POST",
+      "header" : [ {
+        "key" : "Content-Type",
+        "value" : "application/json"
+      }, {
+        "key" : "Accept",
+        "value" : "application/json, text/event-stream"
+      }, {
+        "key" : "MCP-Protocol-Version",
+        "value" : "2026-07-28"
+      }, {
+        "key" : "Mcp-Method",
+        "value" : "server/discover"
+      } ],
+      "url" : {
+        "raw" : "{{baseUrl}}{{mcpPath}}",
+        "host" : [ "{{baseUrl}}" ],
+        "path" : [ "{{mcpPath}}" ]
+      },
+      "body" : {
+        "mode" : "raw",
+        "raw" : "{\n  \"jsonrpc\" : \"2.0\",\n  \"id\" : 1,\n  \"method\" : \"server/discover\",\n  \"params\" : {\n    \"_meta\" : {\n      \"io.modelcontextprotocol/clientInfo\" : {\n        \"name\" : \"postman\",\n        \"version\" : \"1.0.0\"\n      },\n      \"io.modelcontextprotocol/protocolVersion\" : \"2026-07-28\",\n      \"io.modelcontextprotocol/clientCapabilities\" : { }\n    }\n  }\n}",
+        "options" : {
+          "raw" : {
+            "language" : "json"
+          }
+        }
+      }
+    }
+  }, {
+    "name" : "tools/call getweatherforecast",
+    "request" : {
+      "method" : "POST",
+      "header" : [ {
+        "key" : "Content-Type",
+        "value" : "application/json"
+      }, {
+        "key" : "Accept",
+        "value" : "application/json, text/event-stream"
+      }, {
+        "key" : "MCP-Protocol-Version",
+        "value" : "2026-07-28"
+      }, {
+        "key" : "Mcp-Method",
+        "value" : "tools/call"
+      }, {
+        "key" : "Mcp-Name",
+        "value" : "getweatherforecast"
+      } ],
+      "url" : {
+        "raw" : "{{baseUrl}}{{mcpPath}}",
+        "host" : [ "{{baseUrl}}" ],
+        "path" : [ "{{mcpPath}}" ]
+      },
+      "body" : {
+        "mode" : "raw",
+        "raw" : "{\n  \"jsonrpc\" : \"2.0\",\n  \"id\" : 1,\n  \"method\" : \"tools/call\",\n  \"params\" : {\n    \"name\" : \"getweatherforecast\",\n    \"arguments\" : {\n      \"latitude\" : 0.0,\n      \"longitude\" : 0.0,\n      \"current_weather\" : true,\n      \"hourly\" : \"temperature_2m,precipitation\",\n      \"temperature_unit\" : \"celsius\",\n      \"timezone\" : \"auto\"\n    },\n    \"_meta\" : {\n      \"io.modelcontextprotocol/clientInfo\" : {\n        \"name\" : \"postman\",\n        \"version\" : \"1.0.0\"\n      },\n      \"io.modelcontextprotocol/protocolVersion\" : \"2026-07-28\",\n      \"io.modelcontextprotocol/clientCapabilities\" : { }\n    }\n  }\n}",
+        "options" : {
+          "raw" : {
+            "language" : "json"
+          }
+        }
+      }
+    }
+  } ]
+}

@@ -1,0 +1,27 @@
+{
+  "manifestVersion" : "1.0",
+  "generatorApiVersion" : "v3",
+  "artifactId" : "open-meteo-weather-api-mcp",
+  "artifactVersion" : "1.0.0",
+  "language" : "TYPESCRIPT",
+  "languageVersion" : "22",
+  "transport" : "STREAMABLE_HTTP",
+  "authentication" : "NONE",
+  "logging" : "CONSOLE",
+  "observability" : [ "HEALTH_CHECKS", "METRICS" ],
+  "resiliency" : [ "TIMEOUTS", "RETRY" ],
+  "runtimeRenderer" : "typescript-sdk-v2-modern",
+  "targetProtocolVersion" : "2026-07-28",
+  "sourceType" : "MCP_DEFINITION",
+  "pipelineAssetsIncluded" : true,
+  "dockerfileIncluded" : true,
+  "deploymentTarget" : "CLOUD_RUN",
+  "clientConfigsIncluded" : false,
+  "tests" : {
+    "protocolTests" : true,
+    "testCollection" : true,
+    "unitTests" : true
+  },
+  "testCategories" : [ "POSITIVE", "NEGATIVE" ],
+  "files" : [ ".dockerignore", ".env.example", ".github/workflows/ci-cd.yml", ".gitignore", "Dockerfile", "README.md", "contracts/canonical-mcp-definition.json", "contracts/mcp-definition.json", "deployment/runtime-requirements.json", "generation-manifest.json", "mock/mock-service-manifest.json", "package.json", "postman/open-meteo-weather-api-mcp.postman_collection.json", "src/catalog.ts", "src/http.ts", "src/logger.ts", "src/server.ts", "src/telemetry.ts", "testing/test-assets-manifest.json", "tests/http.mjs", "tests/unit.mjs", "tsconfig.json" ]
+}

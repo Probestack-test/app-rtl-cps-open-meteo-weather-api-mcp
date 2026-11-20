@@ -1,0 +1,34 @@
+{
+  "documentStandard" : "FORGESPHERE_MCP_RUNTIME_REQUIREMENTS",
+  "documentVersion" : "1.0",
+  "transport" : "STREAMABLE_HTTP",
+  "mcpPath" : "/mcp",
+  "deploymentTarget" : "CLOUD_RUN",
+  "authentication" : {
+    "mode" : "NONE"
+  },
+  "environment" : [ {
+    "name" : "UPSTREAM_BASE_URL",
+    "required" : false,
+    "kind" : "configuration"
+  }, {
+    "name" : "MCP_ALLOWED_HOSTS",
+    "required" : true,
+    "kind" : "configuration"
+  }, {
+    "name" : "MCP_ALLOWED_ORIGINS",
+    "required" : true,
+    "kind" : "configuration"
+  } ],
+  "operations" : {
+    "healthEndpointsEnabled" : true,
+    "metricsEndpointEnabled" : true,
+    "metricsPath" : "/metrics",
+    "traceContextPropagationEnabled" : false
+  },
+  "secretPolicy" : {
+    "embedValuesInBundle" : false,
+    "resolveAtDeployment" : true,
+    "logSecretValues" : false
+  }
+}
