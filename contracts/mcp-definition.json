@@ -1,0 +1,128 @@
+{
+  "documentStandard" : "FORGESPHERE_MCP_DEFINITION",
+  "documentVersion" : "1.0",
+  "name" : "open-meteo-weather-api-mcp",
+  "displayName" : "Open-Meteo Weather API MCP",
+  "description" : "Live, public weather API -- no API key, no account, no setup. Every call returns real, currently-computed weather data, so the generated MCP tools actually work the moment they're deployed (no secret to configure, no mock data).\n",
+  "version" : "1.0.0",
+  "targetProtocolVersion" : "2026-07-28",
+  "transport" : "STREAMABLE_HTTP",
+  "capabilities" : {
+    "tools" : { },
+    "resources" : { },
+    "prompts" : { }
+  },
+  "security" : {
+    "type" : "NONE"
+  },
+  "tools" : [ {
+    "name" : "getweatherforecast",
+    "description" : "Get the current weather and a short forecast for a location",
+    "inputSchema" : {
+      "type" : "object",
+      "properties" : {
+        "latitude" : {
+          "type" : "number",
+          "format" : "float",
+          "minimum" : -90,
+          "maximum" : 90,
+          "description" : "Latitude of the location (e.g. 28.6139 for New Delhi)."
+        },
+        "longitude" : {
+          "type" : "number",
+          "format" : "float",
+          "minimum" : -180,
+          "maximum" : 180,
+          "description" : "Longitude of the location (e.g. 77.2090 for New Delhi)."
+        },
+        "current_weather" : {
+          "type" : "boolean",
+          "default" : true,
+          "description" : "Include the current weather snapshot in the response."
+        },
+        "hourly" : {
+          "type" : "string",
+          "default" : "temperature_2m,precipitation",
+          "description" : "Comma-separated hourly variables to include (e.g. \"temperature_2m,precipitation\")."
+        },
+        "temperature_unit" : {
+          "type" : "string",
+          "enum" : [ "celsius", "fahrenheit" ],
+          "default" : "celsius"
+        },
+        "timezone" : {
+          "type" : "string",
+          "default" : "auto",
+          "description" : "IANA timezone name, or \"auto\" to infer it from the coordinates."
+        }
+      },
+      "required" : [ "latitude", "longitude", "current_weather" ]
+    },
+    "bindingType" : "HTTP",
+    "http" : {
+      "method" : "GET",
+      "path" : "/forecast",
+      "pathParams" : [ ],
+      "query" : [ {
+        "arg" : "latitude",
+        "name" : "latitude"
+      }, {
+        "arg" : "longitude",
+        "name" : "longitude"
+      }, {
+        "arg" : "current_weather",
+        "name" : "current_weather"
+      }, {
+        "arg" : "hourly",
+        "name" : "hourly"
+      }, {
+        "arg" : "temperature_unit",
+        "name" : "temperature_unit"
+      }, {
+        "arg" : "timezone",
+        "name" : "timezone"
+      } ],
+      "headers" : [ ],
+      "bodyArg" : ""
+    },
+    "binding" : {
+      "type" : "HTTP",
+      "method" : "GET",
+      "path" : "/forecast",
+      "pathParameters" : [ ],
+      "queryParameters" : [ {
+        "argument" : "latitude",
+        "name" : "latitude"
+      }, {
+        "argument" : "longitude",
+        "name" : "longitude"
+      }, {
+        "argument" : "current_weather",
+        "name" : "current_weather"
+      }, {
+        "argument" : "hourly",
+        "name" : "hourly"
+      }, {
+        "argument" : "temperature_unit",
+        "name" : "temperature_unit"
+      }, {
+        "argument" : "timezone",
+        "name" : "timezone"
+      } ],
+      "headers" : [ ],
+      "bodyArgument" : ""
+    }
+  } ],
+  "resources" : [ ],
+  "prompts" : [ ],
+  "runtimePolicy" : {
+    "logging" : true,
+    "metrics" : false,
+    "tracing" : false,
+    "retries" : false,
+    "circuitBreaker" : false
+  },
+  "upstream" : {
+    "baseUrl" : "https://api.open-meteo.com/v1"
+  }
+}
