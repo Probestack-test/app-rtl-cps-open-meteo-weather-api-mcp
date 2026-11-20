@@ -18,7 +18,9 @@ child.on('exit', (code, signal) => { childExited = true;
 try {
   let ready = false;
   for (let i = 0; i < 100 && !childExited; i++) {
-    try { const r = await fetch(origin + '/mcp', { method: 'POST' }); if (r.status === 400) { ready = true; break; } } catch {}
+    // Any HTTP response proves the server is listening. An empty POST may be
+    // rejected as 415 before protocol validation; the assertions below check MCP behavior.
+    try { await fetch(origin + '/mcp', { method: 'POST' }); ready = true; break; } catch {}
     await new Promise(resolve => setTimeout(resolve, 100));
   }
   assert.ok(ready, 'HTTP MCP server did not become ready. Output:\n' + childOutput);
